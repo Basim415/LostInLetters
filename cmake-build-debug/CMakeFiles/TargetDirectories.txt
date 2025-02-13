@@ -1,0 +1,3 @@
+/Users/basimshahzad/CLionProjects/LostInLetters/cmake-build-debug/CMakeFiles/LostInLetters.dir
+/Users/basimshahzad/CLionProjects/LostInLetters/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/basimshahzad/CLionProjects/LostInLetters/cmake-build-debug/CMakeFiles/rebuild_cache.dir
