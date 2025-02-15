@@ -78,3 +78,73 @@ void WordGridGame::selectWords() {
     }
     cout << endl;
 }
+
+void WordGridGame::generateGrid() {
+    vector<char> letters;
+
+    // Collect all 16 letters from selectedWords
+    for (const string &word : selectedWords) {
+        for (char letter : word) {
+            letters.push_back(letter);
+        }
+    }
+
+    // Shuffle the letters randomly
+    srand(time(0));
+    for (int i = letters.size() - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        swap(letters[i], letters[j]);
+    }
+
+    // Fill the 4x4 grid with shuffled letters
+    int index = 0;
+    for (int row = 0; row < 4; row++) {
+        for (int col = 0; col < 4; col++) {
+            grid[row][col] = letters[index++];
+        }
+    }
+}
+
+
+void WordGridGame::displayGrid() {
+    cout << "\n    A   B   C   D" << endl;
+    cout << "  -----------------" << endl;
+
+    for (int row = 0; row < 4; row++) {
+        cout << row + 1 << " | ";  // Print row number
+        for (int col = 0; col < 4; col++) {
+            cout << grid[row][col] << " | ";
+        }
+        cout << "\n  -----------------" << endl;
+    }
+}
+
+
+bool WordGridGame::isValidGuess(string word) {
+    // Convert input to lowercase
+    transform(word.begin(), word.end(), word.begin(), ::tolower);
+
+    // Check if the word is in selectedWords
+    if (find(selectedWords.begin(), selectedWords.end(), word) == selectedWords.end()) {
+        return false;
+    }
+
+    // Check if the word can be formed from grid letters
+    unordered_map<char, int> gridLetterCount;
+    for (int row = 0; row < 4; row++) {
+        for (int col = 0; col < 4; col++) {
+            gridLetterCount[tolower(grid[row][col])]++;
+        }
+    }
+
+    for (char letter : word) {
+        if (gridLetterCount[letter] > 0) {
+            gridLetterCount[letter]--;  // Use the letter
+        } else {
+            return false;  // If any letter is missing, the word is invalid
+        }
+    }
+
+    return true;
+}
+
