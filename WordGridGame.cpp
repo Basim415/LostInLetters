@@ -148,3 +148,87 @@ bool WordGridGame::isValidGuess(string word) {
     return true;
 }
 
+bool WordGridGame::checkWin(vector<string> guesses) {
+    if (guesses.size() != 4) {
+        return false;
+    }
+
+    vector<string> sortedGuesses = guesses;
+    vector<string> sortedSelectedWords = selectedWords;
+
+    //Convert to lowercase for consistency
+    for (string &word : sortedGuesses) {
+        transform(word.begin(), word.end(), word.begin(), ::tolower);
+    }
+    for (string &word : sortedSelectedWords) {
+        transform(word.begin(), word.end(), word.begin(), ::tolower);
+    }
+
+    //Sort both lists and compare
+    sort(sortedGuesses.begin(), sortedGuesses.end());
+    sort(sortedSelectedWords.begin(), sortedSelectedWords.end());
+
+    return sortedGuesses == sortedSelectedWords;
+}
+
+void WordGridGame::playGame() {
+    vector<string> gameGuesses;
+    int attemptsLeft = 3;
+
+    cout << "4x4 Word Grid Game" << endl;
+    cout << "Try to find the 4 words hidden in the grid!" << endl;
+    cout << "You have 3 attempts." << endl << endl;
+
+    displayGrid();
+
+    do {
+        gameGuesses.clear(); // Clear previous guesses at the start of each round
+
+        // Prompt user to enter 4 words
+        cout << "\nEnter your guesses for the 4 words in the grid:" << endl;
+
+        string word;
+        for (int i = 1; i <= 4; i++) {
+            cout << "Word " << i << ": ";
+            cin >> word;
+            gameGuesses.push_back(word);
+        }
+
+        // Ensure exactly 4 words were entered
+        if (gameGuesses.size() != 4) {
+            cout << "You must enter exactly 4 words!" << endl;
+            continue;
+        }
+
+        // Check if all words are valid
+        bool allValid = true;
+        for (const string &guess : gameGuesses) {
+            if (!isValidGuess(guess)) {
+                allValid = false;
+                break;
+            }
+        }
+
+        if (!allValid) {
+            cout << "One or more words are invalid. Try again." << endl;
+            continue;
+        }
+
+        // Check if the player guessed all words correctly
+        if (checkWin(gameGuesses)) {
+            cout << "\nCongratulations! You found all the words. You win!" << endl;
+            return;
+        } else {
+            attemptsLeft--;
+            cout << "\nIncorrect! You have " << attemptsLeft << " attempt(s) left." << endl;
+        }
+
+    } while (attemptsLeft > 0);
+
+    // Reveal the correct words
+    cout << "\nGame Over! The correct words were: ";
+    for (const string &word : selectedWords) {
+        cout << word << " ";
+    }
+    cout << endl;
+}
