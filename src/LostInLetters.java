@@ -212,4 +212,11 @@ public class LostInLetters {
         System.out.println("\nGame Over! The correct words were: " + selectedWords);
 
     }
+    public char[][] getGrid() {
+        return grid;
+    }
+
+    public ArrayList<String> getSelectedWords() {
+        return selectedWords;
+    }
 }
