@@ -57,14 +57,14 @@ dictionary.txt # (Optional) Legacy fallback word list
 - Java JDK 8 or higher
 - A Java IDE (like IntelliJ or Eclipse) **or** terminal access with `javac` / `java`
 
-### 🖼 GUI Version
+###  🖥️ GUI Version
 
 ```bash
 javac LostInLetters.java LostInLettersGUI.java
 java LostInLettersGUI
 ```
 
-### 🧾 Command-Line Version
+### 📟  Command-Line Version
 ```bash
 javac LostInLetters.java Game.java
 java Game
