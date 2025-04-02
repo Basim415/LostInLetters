@@ -47,7 +47,7 @@ dictionary.txt # (Optional) Legacy fallback word list
 - ❌ Game Over or 🎉 Victory popups
 - 🟦 Color-coded status feedback
 
-![Preview](https://user-images.githubusercontent.com/your-screenshot-placeholder.png)
+![Preview](https://github.com/user-attachments/assets/f72ce65b-e89d-487b-ab5e-28eaf564b2db)
 
 ---
 
