@@ -4,9 +4,14 @@ A simple Java-based word puzzle game inspired by [FourWordGrid](https://fourword
 
 ## 🎮 About the Game
 
-In **Lost In Letters**, players are given a 4x4 grid of letters that contains exactly **four hidden 4-letter words**. These words are randomly selected from a dictionary and their letters are shuffled and placed into the grid.
+In **Lost In Letters**, players are presented with a 4x4 grid of shuffled letters that contains exactly **four hidden 4-letter English words**. These words are:
+- Randomly fetched from a public API at runtime
+- Checked for validity using a live dictionary lookup
 
-You have **3 attempts** to guess the correct set of words. Guesses must be valid (using available letters) and match the exact hidden words chosen by the game.
+You have **3 attempts** to guess the correct set of words. Guesses must:
+- Use only letters available in the grid
+- Be one of the four selected words
+- Be valid English words
 
 There are two ways to play:
 - **Command-Line Version**: Simple text interface
@@ -14,23 +19,33 @@ There are two ways to play:
 
 ---
 
-## 🗂️ Project Structure
+## 🌐 Live Word API Integration
 
+Unlike static word games, this project fetches **real, random 4-letter words** from:
+
+- 🔤 [Random Word API (Vercel)](https://random-word-api.vercel.app/)
+- 📚 [Free Dictionary API](https://dictionaryapi.dev/) — used to validate guesses
+
+This means every game session is different and internet-powered.
+
+---
+
+## 🗂️ Project Structure
 📁 LostInLetters: 
-LostInLetters.java # Core game logic: grid generation, word checking 
-Game.java # Entry point for CLI version 
+LostInLetters.java # Core game logic: API integration, grid, validation 
+Game.java # Entry point for the command-line version 
 LostInLettersGUI.java # Swing GUI for an interactive version 
-dictionary.txt # List of 4-letter English words
+dictionary.txt # (Optional) Legacy fallback word list
 
 ---
 
 ## 🖥️ GUI Features
 
-- 🧠 4x4 grid display with randomized letters
+- 🧠 4x4 grid display with randomized API-fetched letters
 - 🔤 Input fields for your 4 guesses
 - 🚦 Real-time attempt counter and validation
-- 💬 Feedback messages with colorful UI
-- ❌ Game Over or 🎉 Victory popups!
+- ❌ Game Over or 🎉 Victory popups
+- 🟦 Color-coded status feedback
 
 ![Preview](https://user-images.githubusercontent.com/your-screenshot-placeholder.png)
 
@@ -38,16 +53,19 @@ dictionary.txt # List of 4-letter English words
 
 ## 🧑‍💻 How to Run
 
-### Prerequisites
+### ✅ Prerequisites
 - Java JDK 8 or higher
-- A Java IDE (like IntelliJ or Eclipse) OR terminal access with `javac`/`java`
+- A Java IDE (like IntelliJ or Eclipse) **or** terminal access with `javac` / `java`
 
-### 🖥️ GUI Version
+### 🖼 GUI Version
 
+```bash
 javac LostInLetters.java LostInLettersGUI.java
 java LostInLettersGUI
+```
 
-### 📟 Command-Line Version
-bash
+### 🧾 Command-Line Version
+```bash
 javac LostInLetters.java Game.java
 java Game
+```
